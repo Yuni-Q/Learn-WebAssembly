@@ -1,0 +1,11 @@
+{
+  "name": "chapter-04-installing-deps",
+  "version": "1.0.0",
+  "description": "## Overview The purpose of this code is to test your Emscripten installation by compiling a C file.",
+  "main": "index.js",
+  "scripts": {
+    "emcc": "emcc main.c -Os -s WASM=1 -s SIDE_MODULE=1 -s BINARYEN_ASYNC_COMPILATION=0 -o main.wasm"
+  },
+  "author": "",
+  "license": "ISC"
+}

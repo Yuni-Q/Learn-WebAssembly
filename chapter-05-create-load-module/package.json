@@ -1,0 +1,16 @@
+{
+  "name": "chapter-05-create-load-module",
+  "version": "1.0.0",
+  "description": "## Overview The purpose of this code is to generate and load WebAssembly modules with and without Emscripten's JavaScript 'glue' code.",
+  "main": "index.js",
+  "scripts": {
+    "emcc": "emcc with-glue.c -O3 -s WASM=1 -s USE_SDL=2 -o with-glue.html",
+    "emcc:2": "emcc with-glue.c -O3 -s WASM=1 -s USE_SDL=2 -s MODULARIZE=1 -o custom-loading.js",
+    "emcc:3": "emcc with-glue.c -O3 -s WASM=1 -s USE_SDL=2 -s SIDE_MODULE=1 -s BINARYEN_ASYNC_COMPILATION=0 -o try-with-glue.wasm",
+    "emcc:4": "emcc without-glue.c -Os -s WASM=1 -s SIDE_MODULE=1 -s BINARYEN_ASYNC_COMPILATION=0 -o without-glue.wasm",
+    "serve": "serve -l 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

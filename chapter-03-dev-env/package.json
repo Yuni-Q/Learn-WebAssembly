@@ -1,0 +1,12 @@
+{
+  "name": "chapter-03-dev-env",
+  "version": "1.0.0",
+  "description": "## Overview The purpose of this code is to test your local server installation.",
+  "main": "index.js",
+  "scripts": {
+    "serve": "serve -l 8080 chapter-03-dev-env"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

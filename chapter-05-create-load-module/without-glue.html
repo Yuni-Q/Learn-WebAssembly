@@ -18,33 +18,36 @@
 
     const env = {
       table: new WebAssembly.Table({ initial: 8, element: 'anyfunc' }),
-      _jsFillRect: function (x, y, w, h) {
+      jsFillRect: function (x, y, w, h) {
         ctx.fillStyle = '#0000ff';
         ctx.fillRect(x, y, w, h);
       },
-      _jsClearRect: function() {
+      jsClearRect: function() {
         ctx.fillStyle = '#ff0000';
         ctx.fillRect(0, 0, 255, 255);
       },
+      g$rect: function() {},
+      g$isRunning: function() {},
+      __memory_base: 0
     };
 
     loadWasm('without-glue.wasm', { env }).then(({ instance }) => {
       const m = instance.exports;
-      m._init();
+      m.init();
 
       // Move the rectangle by 1px in the x and y every 20 milliseconds:
       const loopRectMotion = () => {
         setTimeout(() => {
-          m._moveRect();
-          if (m._getIsRunning()) loopRectMotion();
+          m.moveRect();
+          if (m.getIsRunning()) loopRectMotion();
         }, 20)
       };
 
       // Enable you to pause and resume the rectangle movement:
       document.querySelector('#actionButton')
         .addEventListener('click', event => {
-          const newIsRunning = !m._getIsRunning();
-          m._setIsRunning(newIsRunning);
+          const newIsRunning = !m.getIsRunning();
+          m.etIsRunning(newIsRunning);
           event.target.innerHTML = newIsRunning ? 'Pause' : 'Start';
           if (newIsRunning) loopRectMotion();
         });

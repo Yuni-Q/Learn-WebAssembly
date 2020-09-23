@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"type": "shell",
+			"command": "emcc",
+			"args": [
+				"${file}",
+				"-Os",
+				"-s", "WASM=1",
+				"-s", "SIDE_MODULE=1",
+				"-s", "BINARYEN_ASYNC_COMPILATION=0",
+				"-o", "${fileDirname}/${fileBasenameNoExtension}.wasm"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"panel": "new",
+			}
+		}
+	]
+}
