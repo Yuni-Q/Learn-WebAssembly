@@ -1,0 +1,16 @@
+{
+  "name": "chapter-06-interact-with",
+  "version": "1.0.0",
+  "description": "## Overview The purpose of this code is to demonstrate how to communicate between JavaScript and Wasm modules with and without Emscripten.",
+  "main": "index.js",
+  "scripts": {
+    "emcc": "emcc js-with-glue.c -O3 -s WASM=1 -s MODULARIZE=1 -o js-with-glue.js",
+    "emcc2": "emcc js-without-glue.cpp -Os -s WASM=1 -s SIDE_MODULE=1 -s BINARYEN_ASYNC_COMPILATION=0 -o js-without-glue.wasm",
+    "emcc3": "emcc js-without-glue.cpp -O1 -g4 -s WASM=1 -s SIDE_MODULE=1 -s BINARYEN_ASYNC_COMPILATION=0 -o js-without-glue.wasm --source-map-base http://localhost:8080/chapter-06-interact-with-js/",
+    "serve": "serve -l 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "author": "",
+  "license": "ISC"
+}

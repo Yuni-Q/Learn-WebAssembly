@@ -1,0 +1,20 @@
+{
+  "name": "learn-webassembly",
+  "version": "1.0.0",
+  "description": "This repository contains the examples from the book **Learn WebAssembly**, released by [Packt Publishing](https://www.packtpub.com).",
+  "main": "index.js",
+  "scripts": {
+    "serve": "serve -l 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuni-Q/Learn-WebAssembly.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yuni-Q/Learn-WebAssembly/issues"
+  },
+  "homepage": "https://github.com/Yuni-Q/Learn-WebAssembly#readme"
+}

@@ -57,30 +57,32 @@
 
     const env = {
       table: new WebAssembly.Table({ initial: 8, element: 'anyfunc' }),
-      _jsFillCircle: fillCircle,
-      _jsClearCircle: function() {
+      jsFillCircle: fillCircle,
+      jsClearCircle: function() {
         ctx.fillStyle = '#fff';
         ctx.fillRect(0, 0, 255, 255);
       },
+      g$circle: function() {},
+      g$isRunning: function() {},
     };
 
     loadWasm('js-without-glue.wasm', { env }).then(({ instance }) => {
       const m = instance.exports;
-      m._init();
+      m.init();
 
       // Move the circle by 1px in the x and y every 20 milliseconds:
       const loopCircleMotion = () => {
         setTimeout(() => {
-          m._moveCircle();
-          if (m._getIsRunning()) loopCircleMotion();
+          m.moveCircle();
+          if (m.getIsRunning()) loopCircleMotion();
         }, 20)
       };
 
       // Enable you to pause and resume the circle movement:
       document.querySelector('#actionButton')
         .addEventListener('click', event => {
-          const newIsRunning = !m._getIsRunning();
-          m._setIsRunning(newIsRunning);
+          const newIsRunning = !m.getIsRunning();
+          m.setIsRunning(newIsRunning);
           event.target.innerHTML = newIsRunning ? 'Pause' : 'Start';
           if (newIsRunning) loopCircleMotion();
         });

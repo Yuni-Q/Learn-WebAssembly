@@ -9,9 +9,9 @@
 bool isRunning = true;
 
 typedef struct Circle {
-  int x;
-  int y;
-  char direction;
+    char direction;
+    int x;
+    int y;
 } Circle;
 
 struct Circle circle;
@@ -66,9 +66,9 @@ void setIsRunning(bool newIsRunning) {
 }
 
 void init() {
+    circle.direction = 'R';
     circle.x = 0;
     circle.y = 255;
-    circle.direction = 'R';
     setIsRunning(true);
 }
 }
