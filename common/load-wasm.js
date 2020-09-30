@@ -4,7 +4,7 @@
  * Wasm module.
  */
 const getDefaultEnv = () => ({
-  memoryBase: 0,
+  __memory_base: 0,
   tableBase: 0,
   memory: new WebAssembly.Memory({ initial: 256 }),
   table: new WebAssembly.Table({ initial: 2, element: 'anyfunc' }),

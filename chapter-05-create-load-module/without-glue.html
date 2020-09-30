@@ -28,7 +28,6 @@
       },
       g$rect: function() {},
       g$isRunning: function() {},
-      __memory_base: 0
     };
 
     loadWasm('without-glue.wasm', { env }).then(({ instance }) => {
@@ -47,7 +46,7 @@
       document.querySelector('#actionButton')
         .addEventListener('click', event => {
           const newIsRunning = !m.getIsRunning();
-          m.etIsRunning(newIsRunning);
+          m.setIsRunning(newIsRunning);
           event.target.innerHTML = newIsRunning ? 'Pause' : 'Start';
           if (newIsRunning) loopRectMotion();
         });

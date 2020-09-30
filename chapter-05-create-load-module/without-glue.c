@@ -17,9 +17,9 @@ extern int jsFillRect(int x, int y, int width, int height);
 bool isRunning = true;
 
 typedef struct Rect {
-  int x;
-  int y;
-  char direction;
+    char direction;
+    int x;
+    int y;
 } Rect;
 
 struct Rect rect;
@@ -67,8 +67,8 @@ void setIsRunning(bool newIsRunning) {
 }
 
 void init() {
+    setIsRunning(true);
+    rect.direction = 'R';
     rect.x = 0;
     rect.y = 0;
-    rect.direction = 'R';
-    setIsRunning(true);
 }
