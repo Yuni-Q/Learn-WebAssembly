@@ -6,12 +6,12 @@
 			"type": "shell",
 			"command": "emcc",
 			"args": [
-				"${file}",
+				"${workpaceFolder}/main.c",
 				"-Os",
 				"-s", "WASM=1",
 				"-s", "SIDE_MODULE=1",
 				"-s", "BINARYEN_ASYNC_COMPILATION=0",
-				"-o", "${fileDirname}/${fileBasenameNoExtension}.wasm"
+				"-o", "${workpaceFolder}/src/assets/main.wasm"
 			],
 			"group": {
 				"kind": "build",

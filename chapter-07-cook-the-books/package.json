@@ -6,6 +6,7 @@
   "scripts": {
     "start": "browser-sync start --server \"src\" --files \"src/**\" --single --no-open --port 4000",
     "setup-api": "node config/setup-api.js",
+    "emcc": "emcc lib/main.-c -Os -s WASM=1 -s SIDE_MODULE=1 -s BINARYEN_ASYNC_COMPILATION=0 -o src/assets/main.wasm",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
