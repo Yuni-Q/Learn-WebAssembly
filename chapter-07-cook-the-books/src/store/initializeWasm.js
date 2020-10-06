@@ -23,13 +23,20 @@ const instantiateMain = (compiledMain, memoryInstance, wasmMemory) => {
   return WebAssembly.instantiate(compiledMain, {
     env: {
       memoryBase: 0,
+      __memory_base: 0,
       tableBase: 0,
       memory: wasmMemory,
-      table: new WebAssembly.Table({ initial: 16, element: 'anyfunc' }),
+      table: new WebAssembly.Table({ initial: 0, element: 'anyfunc' }),
       abort: console.log,
       _consoleLog: value => console.log(value),
       _malloc: memoryMethods.malloc,
-      _free: memoryMethods.free
+      _free: memoryMethods.free,
+      malloc: memoryMethods.malloc,
+      free: memoryMethods.free,
+      stackSave: () => {},
+      stackRestore: () => {},
+      g$transactionsHead: () => {},
+      g$categoriesHead: () => {},
     }
   });
 };
@@ -39,7 +46,7 @@ const instantiateMain = (compiledMain, memoryInstance, wasmMemory) => {
  * returns the `exports` property from main's `instance`.
  */
 export default async function initializeWasm() {
-  const wasmMemory = new WebAssembly.Memory({ initial: 1024 });
+  const wasmMemory = new WebAssembly.Memory({ initial: 32767 });
   const [compiledMain, compiledMemory] = await fetchAndCompileModules();
 
   const memoryInstance = await WebAssembly.instantiate(compiledMemory, {

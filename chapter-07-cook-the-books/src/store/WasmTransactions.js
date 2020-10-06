@@ -5,6 +5,7 @@ import initializeWasm from './initializeWasm.js';
  * than access it directly from the Vue components or store).
  * @class
  */
+
 export default class WasmTransactions {
   constructor() {
     this.instance = null;
@@ -37,7 +38,7 @@ export default class WasmTransactions {
     const { id, category } = transaction;
     const { validRaw, validCooked } = this.getValidAmounts(transaction);
     const categoryId = this.getCategoryId(category);
-    this.instance._addTransaction(id, categoryId, validRaw, validCooked);
+    this.instance.addTransaction(id, categoryId, validRaw, validCooked);
   }
 
   // Updates the transaction node in the Wasm module:
@@ -45,12 +46,12 @@ export default class WasmTransactions {
     const { id, category } = transaction;
     const { validRaw, validCooked } = this.getValidAmounts(transaction);
     const categoryId = this.getCategoryId(category);
-    this.instance._editTransaction(id, categoryId, validRaw, validCooked);
+    this.instance.editTransaction(id, categoryId, validRaw, validCooked);
   }
 
   // Removes the transaction node from the linked list in the Wasm module:
   removeFromWasm(transactionId) {
-    this.instance._removeTransaction(transactionId);
+    this.instance.removeTransaction(transactionId);
   }
 
   // Populates the linked list in the Wasm module. The categories are
@@ -63,12 +64,12 @@ export default class WasmTransactions {
   // Returns the balance for raw and cooked transactions based on the
   // specified initial balances.
   getCurrentBalances(initialRaw, initialCooked) {
-    const currentRaw = this.instance._getFinalBalanceForType(
-      AMOUNT_TYPE.raw,
+    const currentRaw = this.instance.getFinalBalanceForType(
+      1,
       initialRaw
     );
-    const currentCooked = this.instance._getFinalBalanceForType(
-      AMOUNT_TYPE.cooked,
+    const currentCooked = this.instance.getFinalBalanceForType(
+      2,
       initialCooked
     );
     return { currentRaw, currentCooked };
@@ -79,12 +80,12 @@ export default class WasmTransactions {
   getCategoryTotals() {
     // This is done to ensure the totals reflect the most recent
     // transactions:
-    this.instance._recalculateForCategories();
+    this.instance.recalculateForCategories();
     const categoryTotals = this.categories.map((category, idx) => ({
       category,
       id: idx,
-      rawTotal: this.instance._getCategoryTotal(AMOUNT_TYPE.raw, idx),
-      cookedTotal: this.instance._getCategoryTotal(AMOUNT_TYPE.cooked, idx)
+      rawTotal: this.instance.getCategoryTotal(1, idx),
+      cookedTotal: this.instance.getCategoryTotal(2, idx)
     }));
 
     const totalsByGroup = { income: [], expenses: [] };

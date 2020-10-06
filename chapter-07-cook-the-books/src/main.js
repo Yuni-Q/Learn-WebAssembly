@@ -19,7 +19,7 @@ window.AMOUNT_TYPE = {
 // render the app.
 initializeStore()
   .then(() => {
-    new Vue({ render: h => h(App), el: '#app' });
+    // new Vue({ render: h => h(App), el: '#app' });
   })
   .catch(err => {
     console.error(err);
